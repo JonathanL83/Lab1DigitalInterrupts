@@ -1,18 +1,24 @@
 #include "mbed.h"
 
-#define USER_BUTTON PA_13
+InterruptIn button(PA_13,PullUp);
 
-InterruptIn button(USER_BUTTON);
+// Flag variable
+volatile bool button_flag = false;
 
+// Interrupt function
 void button_pressed() {
-    printf("Button pressed\n");
+    button_flag = true;
 }
 
 int main() {
     
     button.fall(&button_pressed);
 
+    // Main loop
     while (1) {
-        // Do nothing, waiting for the interrupt
+        if (button_flag) {
+            printf("Button pressed\n");
+            button_flag = false;
+        }
     }
 }
