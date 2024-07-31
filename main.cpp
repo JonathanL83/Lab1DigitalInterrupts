@@ -1,6 +1,6 @@
 #include "mbed.h"
 
-// Define the button pins with pull-up mode
+// Define the button pin with pull-up mode
 InterruptIn button(PA_13,PullUp);
 
 // Flag variable
